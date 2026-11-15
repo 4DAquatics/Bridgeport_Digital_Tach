@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Bridgeport Digital Tach Firmware</title>
-<script type="module" src="https://unpkg.com/esp-web-tools@10.0.1/dist/web/install-button.js?module"></script>
 <style>
   :root { --bg:#f5f5f2; --fg:#1c1c1a; --muted:#5f5f5a; --card:#ffffff; --line:#e3e3dd; --accent:#1f6feb; --accent-fg:#fff; --soft:#eef3fd; }
   @media (prefers-color-scheme: dark) {
@@ -19,7 +18,7 @@
   .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px; margin:18px 0; }
   .who { color:var(--muted); font-size:15px; margin:0 0 14px; }
   ol { padding-left:24px; margin:10px 0; } li { margin:10px 0; }
-  .btn, esp-web-install-button button[slot=activate] { display:inline-block; font:inherit; font-size:18px; font-weight:600; padding:14px 24px;
+  .btn { display:inline-block; font:inherit; font-size:18px; font-weight:600; padding:14px 24px;
     border:0; border-radius:10px; background:var(--accent); color:var(--accent-fg); text-decoration:none; cursor:pointer; }
   .note { background:var(--soft); border-radius:10px; padding:12px 14px; font-size:15px; margin-top:14px; }
   table { border-collapse:collapse; width:100%; font-size:15px; margin-top:8px; }
@@ -66,33 +65,6 @@
         <li>Type the address with the <b>http://</b> at the start, exactly as shown above.</li>
         <li>Turn off <b>mobile data</b> while you update, so the phone doesn't go around the gauge's Wi-Fi.</li>
         <li>Check the phone is still joined to <b>Bridgeport-RPM</b>. Some phones switch back to another Wi-Fi when there's no internet.</li>
-      </ul>
-    </details>
-  </section>
-
-  <section class="card">
-    <h2>First install over USB-C</h2>
-    <p class="who">For new gauges at the workbench. You need a computer with <b>Chrome</b> or <b>Edge</b>.</p>
-    <ol>
-      <li>Plug the gauge's <b>UART</b> USB-C port into the computer with a <b>USB-C data cable</b>.</li>
-      <li>Click <b>Install</b> below. A list of ports pops up: pick the one called <b>USB-Enhanced-SERIAL CH343</b> (or <b>USB Single Serial</b>) and click <b>Connect</b>.</li>
-      <li>Click <b>Install</b> again in the window that opens, and wait for <b>Installation complete</b> (about 2 minutes).</li>
-      <li>Unplug. Done.</li>
-    </ol>
-    <p>
-      <esp-web-install-button manifest="manifest.json">
-        <button slot="activate">Install</button>
-        <span slot="unsupported">This browser can't install firmware. Open this page in <b>Chrome</b> or <b>Edge</b> on a computer.</span>
-        <span slot="not-allowed">This page has to be opened from its https:// address.</span>
-      </esp-web-install-button>
-    </p>
-    <details>
-      <summary>No port in the list, or it didn't finish?</summary>
-      <ul>
-        <li>Try another USB-C cable. Some cables only charge and can't carry data.</li>
-        <li>Make sure the cable is in the board's <b>UART</b> port, not its other USB-C port.</li>
-        <li>Close any other program that might be using the port (Arduino IDE, VS Code, serial monitor), then try again.</li>
-        <li>Unplug the gauge, plug it back in, and click Install again. Nothing can be damaged by trying again.</li>
       </ul>
     </details>
   </section>
