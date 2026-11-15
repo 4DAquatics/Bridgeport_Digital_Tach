@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bridgeport Digital Tach Firmware</title>
+<script type="module" src="https://unpkg.com/esp-web-tools@10.0.1/dist/web/install-button.js?module"></script>
+<style>
+  :root { --bg:#f5f5f2; --fg:#1c1c1a; --muted:#5f5f5a; --card:#ffffff; --line:#e3e3dd; --accent:#1f6feb; --accent-fg:#fff; --soft:#eef3fd; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#131313; --fg:#ececea; --muted:#a3a39e; --card:#1e1e1d; --line:#2e2e2c; --accent:#4c8dff; --accent-fg:#fff; --soft:#1c2536; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; padding:24px 16px 48px; background:var(--bg); color:var(--fg); font:17px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif; }
+  main { max-width:620px; margin:0 auto; }
+  h1 { font-size:28px; line-height:1.2; margin:0 0 4px; }
+  h2 { font-size:21px; margin:0 0 4px; }
+  .sub { color:var(--muted); margin:0 0 20px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px; margin:18px 0; }
+  .who { color:var(--muted); font-size:15px; margin:0 0 14px; }
+  ol { padding-left:24px; margin:10px 0; } li { margin:10px 0; }
+  .btn, esp-web-install-button button[slot=activate] { display:inline-block; font:inherit; font-size:18px; font-weight:600; padding:14px 24px;
+    border:0; border-radius:10px; background:var(--accent); color:var(--accent-fg); text-decoration:none; cursor:pointer; }
+  .note { background:var(--soft); border-radius:10px; padding:12px 14px; font-size:15px; margin-top:14px; }
+  table { border-collapse:collapse; width:100%; font-size:15px; margin-top:8px; }
+  td { padding:7px 6px; border-top:1px solid var(--line); vertical-align:top; }
+  .dot { display:inline-block; width:12px; height:12px; border-radius:50%; margin-right:6px; vertical-align:-1px; }
+  details { margin-top:12px; font-size:15px; } summary { cursor:pointer; color:var(--muted); }
+  code { font-size:15px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Bridgeport Digital Tach firmware</h1>
+  <p class="sub">Latest version: <b>v9.5B</b></p>
+
+  <section class="card">
+    <h2>Update over Wi-Fi</h2>
+    <p class="who">For installed gauges. You need a phone. Nothing has to be unplugged. The spindle must be stopped.</p>
+    <ol>
+      <li><b>First, while your phone still has internet</b>, download the update file:<br><br>
+        <a class="btn" href="Bridgeport_Digital_Tach_v9.5B.bin" download="Bridgeport_Digital_Tach_v9.5B_WiFi_update.bin">Download update file</a></li>
+      <li>On the gauge, <b>tap the gear in the middle of the dial</b> (or swipe down), then tap <b>Wi-Fi download</b>.
+        The gauge shows a QR code, with the network name and password under it.</li>
+      <li><b>Scan the QR code</b> with your phone's camera and join the network <b>Bridgeport-RPM</b>.
+        If the phone warns there's no internet, choose to <b>stay connected</b>.
+        <div class="note">No camera handy? Open <b>Wi-Fi settings</b>, pick <b>Bridgeport-RPM</b> and type the password shown on the gauge. It is a new password every time.</div></li>
+      <li>The gauge's page may open by itself. If not, come back to this page and tap:<br><br>
+        <a class="btn" href="http://192.168.4.1/">Open the gauge's page</a>
+        <div class="note">Or type the full address into <b>Chrome</b>, including the <b>http://</b> at the start:<br>
+          <b>http://192.168.4.1</b><br>
+          Without the http:// some browsers search for it or try a secure address the gauge doesn't have,
+          and say they <i>can't reach this page</i>.</div></li>
+      <li>At the bottom of the gauge's page, tap <b>Choose file</b>, pick the file you downloaded, then tap <b>Update firmware</b>.
+        Keep the page open until it says <b>Update installed</b> (about a minute). The gauge shows the progress too.</li>
+      <li>The gauge restarts by itself on the new version. Switch your phone back to your normal Wi-Fi. Done.</li>
+    </ol>
+    <div class="note">Wi-Fi switches itself off after 10 minutes, or as soon as the spindle starts. <b>STOP Wi-Fi</b> on the gauge switches it off straight away.
+      Your settings, tool presets and run-time totals are not affected. If the update doesn't finish, nothing is changed and the gauge carries on with the version it had.</div>
+    <p style="font-size:15px">To check the version: on the gauge, swipe up twice. The <b>SETUP</b> page shows it at the top.</p>
+    <details>
+      <summary>Joined the Wi-Fi but the gauge's page won't open?</summary>
+      <ul>
+        <li>Use <b>Chrome</b>. Other browsers (Edge, Samsung Internet) may refuse addresses that don't start with https://.</li>
+        <li>If a small sign-in window popped up, close it and open the address in your normal browser instead. The pop-up window can't pick files.</li>
+        <li>Type the address with the <b>http://</b> at the start, exactly as shown above.</li>
+        <li>Turn off <b>mobile data</b> while you update, so the phone doesn't go around the gauge's Wi-Fi.</li>
+        <li>Check the phone is still joined to <b>Bridgeport-RPM</b>. Some phones switch back to another Wi-Fi when there's no internet.</li>
+      </ul>
+    </details>
+  </section>
+
+  <section class="card">
+    <h2>First install over USB-C</h2>
+    <p class="who">For new gauges at the workbench. You need a computer with <b>Chrome</b> or <b>Edge</b>.</p>
+    <ol>
+      <li>Plug the gauge's <b>UART</b> USB-C port into the computer with a <b>USB-C data cable</b>.</li>
+      <li>Click <b>Install</b> below. A list of ports pops up: pick the one called <b>USB-Enhanced-SERIAL CH343</b> (or <b>USB Single Serial</b>) and click <b>Connect</b>.</li>
+      <li>Click <b>Install</b> again in the window that opens, and wait for <b>Installation complete</b> (about 2 minutes).</li>
+      <li>Unplug. Done.</li>
+    </ol>
+    <p>
+      <esp-web-install-button manifest="manifest.json">
+        <button slot="activate">Install</button>
+        <span slot="unsupported">This browser can't install firmware. Open this page in <b>Chrome</b> or <b>Edge</b> on a computer.</span>
+        <span slot="not-allowed">This page has to be opened from its https:// address.</span>
+      </esp-web-install-button>
+    </p>
+    <details>
+      <summary>No port in the list, or it didn't finish?</summary>
+      <ul>
+        <li>Try another USB-C cable. Some cables only charge and can't carry data.</li>
+        <li>Make sure the cable is in the board's <b>UART</b> port, not its other USB-C port.</li>
+        <li>Close any other program that might be using the port (Arduino IDE, VS Code, serial monitor), then try again.</li>
+        <li>Unplug the gauge, plug it back in, and click Install again. Nothing can be damaged by trying again.</li>
+      </ul>
+    </details>
+  </section>
+</main>
+</body>
+</html>
